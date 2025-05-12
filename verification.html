@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Verified - Commis</title>
+    <style>
+        @font-face {
+            font-family: 'Baloo';
+            src: url('../fonts/Baloo-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Baloo', Arial, sans-serif;
+            background-color: #FAF9F6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #80A85A;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #80A85A;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #6a8f4a;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/YOUR-USERNAME/commis-verification/main/logo.png" alt="Commis Logo" class="logo">
+        <h2>Congratulations! Your Account is Now Verified!</h2>
+        <p>Thank you for verifying your email address.</p>
+        <p>You can now close this page and log in to the Commis app on your phone or tablet.</p>
+        <p>Enjoy using Commis for all your cooking needs!</p>
+        
+        <!-- This button will only be shown on mobile devices -->
+        <a href="commis://auth-callback?type=signup" id="openAppButton" class="button hidden">Open Commis App</a>
+    </div>
+
+    <script>
+        // Check if the user is on a mobile device
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Function to show the "Open App" button on mobile devices
+        function setupDeepLink() {
+            const openAppButton = document.getElementById('openAppButton');
+            
+            if (isMobileDevice()) {
+                openAppButton.classList.remove('hidden');
+                
+                // Attempt to open the app automatically after a short delay
+                setTimeout(function() {
+                    window.location.href = "commis://auth-callback?type=signup";
+                }, 1500);
+            }
+        }
+
+        // Run the setup when the page loads
+        window.onload = setupDeepLink;
+    </script>
+</body>
+</html>
